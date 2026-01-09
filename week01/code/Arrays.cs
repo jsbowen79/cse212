@@ -24,11 +24,11 @@ public static class Arrays
         
         double[] multiplesArray = new double[length];
 
-        for (int i = 0; i > length; i++)
+        for (int i = 0; i < length; i++)
         {
-            multiplesArray[i]=number * (i+1); 
+            multiplesArray[i] = number * (i + 1);
         }
-
+       
         return multiplesArray; 
     }
 
