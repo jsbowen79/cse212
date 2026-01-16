@@ -1,6 +1,7 @@
 ﻿public class PriorityQueue
 {
     private List<PriorityItem> _queue = new();
+    internal IReadOnlyList<PriorityItem> Items => _queue;
 
     /// <summary>
     /// Add a new value to the queue with an associated priority.  The
@@ -24,14 +25,17 @@
 
         // Find the index of the item with the highest priority to remove
         var highPriorityIndex = 0;
-        for (int index = 1; index < _queue.Count - 1; index++)
+        for (int index = 0; index <= _queue.Count - 1; index++)
         {
-            if (_queue[index].Priority >= _queue[highPriorityIndex].Priority)
-                highPriorityIndex = index;
+            if (_queue[index].Priority >= highPriorityIndex)
+                highPriorityIndex = _queue[index].Priority;
         }
 
         // Remove and return the item with the highest priority
-        var value = _queue[highPriorityIndex].Value;
+        int valueIndex = _queue.FindIndex(i => i.Priority == highPriorityIndex);
+        var value = _queue[valueIndex].ToString();
+        _queue.RemoveAt(valueIndex);     
+        
         return value;
     }
 

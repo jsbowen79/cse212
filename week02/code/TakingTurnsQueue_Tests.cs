@@ -1,3 +1,4 @@
+using System.Globalization;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 // TODO Problem 1 - Run test cases and record any defects the test code finds in the comment above the test method.
@@ -11,7 +12,11 @@ public class TakingTurnsQueueTests
     // Scenario: Create a queue with the following people and turns: Bob (2), Tim (5), Sue (3) and
     // run until the queue is empty
     // Expected Result: Bob, Tim, Sue, Bob, Tim, Sue, Tim, Sue, Tim, Tim
-    // Defect(s) Found: 
+    // Defect(s) Found: 1)GetNextPerson () => Moved person.Turns out of the if statement.  
+    // 2)GetNextPerson() => Changed the if statement to > 0 instead of > 1.
+    // 3) PersonEnqueue() => Function was adding people at index 0 instead of at the end 
+    //    of the list.  Changed from "_queue.insert(0, person)" to "_queue.Add(person).  
+
     public void TestTakingTurnsQueue_FiniteRepetition()
     {
         var bob = new Person("Bob", 2);
@@ -43,7 +48,7 @@ public class TakingTurnsQueueTests
     // Scenario: Create a queue with the following people and turns: Bob (2), Tim (5), Sue (3)
     // After running 5 times, add George with 3 turns.  Run until the queue is empty.
     // Expected Result: Bob, Tim, Sue, Bob, Tim, Sue, Tim, George, Sue, Tim, George, Tim, George
-    // Defect(s) Found: 
+    // Defect(s) Found: None
     public void TestTakingTurnsQueue_AddPlayerMidway()
     {
         var bob = new Person("Bob", 2);
@@ -85,7 +90,14 @@ public class TakingTurnsQueueTests
     // Scenario: Create a queue with the following people and turns: Bob (2), Tim (Forever), Sue (3)
     // Run 10 times.
     // Expected Result: Bob, Tim, Sue, Bob, Tim, Sue, Tim, Sue, Tim, Tim
-    // Defect(s) Found: 
+    // Defect(s) Found: Infinate people were not infinate.  The changes I made for test 1 
+    // failed to take infinite turns into account.  
+    // 1) GetNextPerson() => Changed the if condition for enqueueing to "person.turns-1 != 0"
+    // This technically solved the problem, as the assingment says that numbers "0 or less" 
+    // mean that the turns are infinite; however, the test did not like the infinite turns 
+    // being less than 0; so, I created a separate if statements for subtracting one from 
+    // person.turns only if person.Turns != 0 .  
+
     public void TestTakingTurnsQueue_ForeverZero()
     {
         var timTurns = 0;
@@ -116,7 +128,12 @@ public class TakingTurnsQueueTests
     // Scenario: Create a queue with the following people and turns: Tim (Forever), Sue (3)
     // Run 10 times.
     // Expected Result: Tim, Sue, Tim, Sue, Tim, Sue, Tim, Tim, Tim, Tim
-    // Defect(s) Found: 
+    // Defect(s) Found: My solution to the previous test didn't take into account if negative 
+     // numbers were used as a turns parameter.  
+     // 1) Changed GetNextPerson() => If condition controlling decrementing of turns from 
+     // "person.Turns != 0" to "person.Turns > 0".  
+     // By the way, large numbers are infinite.  That's the definition of infinite!  LOL
+
     public void TestTakingTurnsQueue_ForeverNegative()
     {
         var timTurns = -3;
@@ -143,7 +160,7 @@ public class TakingTurnsQueueTests
     [TestMethod]
     // Scenario: Try to get the next person from an empty queue
     // Expected Result: Exception should be thrown with appropriate error message.
-    // Defect(s) Found: 
+    // Defect(s) Found: None
     public void TestTakingTurnsQueue_Empty()
     {
         var players = new TakingTurnsQueue();
