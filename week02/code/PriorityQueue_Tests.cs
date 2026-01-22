@@ -56,7 +56,7 @@ public class PriorityQueueTests
 
         //Dequeue Function  
         var result = priorityQueue.Dequeue();
-        Assert.AreEqual(result, "Purity (Pri:2)") ;
+        Assert.AreEqual(result, "Purity") ;
 
         Assert.AreEqual(priorityQueue.Items[0].Value, "Joseph");
         Assert.AreEqual(priorityQueue.Items.Count, 1);
@@ -66,7 +66,7 @@ public class PriorityQueueTests
         priorityQueue.Enqueue("Purity", 2);
         priorityQueue.Enqueue("Serenity", 2);
         result = priorityQueue.Dequeue();
-        Assert.AreEqual(result, "Purity (Pri:2)"); 
+        Assert.AreEqual(result, "Purity"); 
         Assert.AreEqual(priorityQueue.Items.Count, 2);
 
 

@@ -1,6 +1,10 @@
-﻿public static class DisplaySums {
-    public static void Run() {
+﻿using Microsoft.VisualBasic;
+
+public static class DisplaySums {
+    public static void Run()
+    {
         DisplaySumPairs([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+
         // Should show something like (order does not matter):
         // 6 4
         // 7 3
@@ -19,7 +23,10 @@
         // Should show something like (order does not matter):
         // 8 2
         // -1 11
+    var entry =`47 + 54`
     }
+    
+    
 
     /// <summary>
     /// Display pairs of numbers (no duplicates should be displayed) that sum to

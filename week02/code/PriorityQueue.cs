@@ -27,14 +27,13 @@
         var highPriorityIndex = 0;
         for (int index = 0; index <= _queue.Count - 1; index++)
         {
-            if (_queue[index].Priority >= highPriorityIndex)
-                highPriorityIndex = _queue[index].Priority;
+            if (_queue[index].Priority > _queue[highPriorityIndex].Priority)
+                highPriorityIndex = index;
         }
 
         // Remove and return the item with the highest priority
-        int valueIndex = _queue.FindIndex(i => i.Priority == highPriorityIndex);
-        var value = _queue[valueIndex].ToString();
-        _queue.RemoveAt(valueIndex);     
+        string value = _queue[highPriorityIndex].Value;
+        _queue.RemoveAt(highPriorityIndex);     
         
         return value;
     }
