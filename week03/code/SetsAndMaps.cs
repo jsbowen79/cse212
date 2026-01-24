@@ -31,15 +31,29 @@ public static class SetsAndMaps
             char[] chars = word.ToCharArray();
             Array.Reverse(chars);
             string reverseWord = new string(chars);
-            if (wordset.Contains(reverseWord))
-            {
-                string option1 = word + " & " + reverseWord;
-                string option2 = reverseWord + " & " + word;
 
-                if (!foundPairs.Contains(option1) && !foundPairs.Contains(option2) && option1 != option2){
-                    foundPairs.Add(option1);
+            if (word != reverseWord && wordset.Contains(reverseWord))
+            {
+                string pair;
+                if (string.Compare(word, reverseWord) < 0)
+                {
+                    pair = $"{word} & {reverseWord}";
                 }
-            }         
+                else
+                {
+                    pair = $"{reverseWord} & {word}";
+                }
+                foundPairs.Add(pair); 
+            }
+            // if (wordset.Contains(reverseWord) &&)
+            // {
+            //     string option1 = word + " & " + reverseWord;
+            //     string option2 = reverseWord + " & " + word;
+
+            //     if (!foundPairs.Contains(option1) && !foundPairs.Contains(option2) && option1 != option2){
+            //         foundPairs.Add(option1);
+            //     }
+            // }         
         }
          
         return foundPairs.ToArray();
