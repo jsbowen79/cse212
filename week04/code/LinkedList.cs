@@ -135,19 +135,19 @@ public class LinkedList : IEnumerable<int>
     /// </summary>
     public void Remove(int value)
     {
-        if (this._head !=null && this._tail != null)
+        if (this._head !=null)
         {
             
             if( this._head.Data==value)
             {
                 RemoveHead();
                 return; 
-            } else if (this.Count() == 2 && this._tail.Data == value)
+            } else if (this.Count() == 2 && this._tail!.Data == value)
             {
                 RemoveTail(); 
             }else
             {
-                Node? current = this._head; 
+                Node? current = this._head.Next; 
                 while (current!= null)
                 {
                     if (current.Data == value)
