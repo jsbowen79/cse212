@@ -151,36 +151,22 @@ public static class Recursion
     /// </summary>
     public static void WildcardBinary(string pattern, List<string> results)
     {
-        string result = "";
-        char[] options = new char[] { '1', '0' };
-        
-        if (pattern.Length > 0)
-        {
-            
-            for (int i = 0; i < pattern.Length; i++)
-            {
-                if (options.Contains(pattern[i]))
-                {
-                    result = result + pattern[i];
-                }
-                else
-                {
-                    var usableChar = options.ToString();
-                    if (result.Length == pattern.Length)
-                    {
-                        results.Add(result);
-                        return;
-                    }
-                    else
-                    {
-                        WildcardBinary(usableChar!, results);
-                    }
 
-                }
-            };
-            results.Add(result);
-        
-        } else { results.Add(result); }
+        if (!pattern.Contains('*'))
+
+        {
+            results.Add(pattern);
+        }
+        else
+        {
+            int index = pattern.IndexOf("*"); 
+            string beginning = pattern[..index];
+            string end = pattern[(index + 1)..];
+            string newOption1 = beginning + "0" + end;
+            string newOption2 = beginning + "1" + end;
+            WildcardBinary(newOption1, results);
+            WildcardBinary(newOption2, results); 
+        }
     }
 
 
