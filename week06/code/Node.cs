@@ -12,8 +12,12 @@ public class Node
     public void Insert(int value)
     {
         // TODO Start Problem 1
+        if (this.Contains(value))
+        {
+            return;
+        }
 
-        if (value < Data)
+        else if (value < Data)
         {
             // Insert to the left
             if (Left is null)
@@ -33,13 +37,88 @@ public class Node
 
     public bool Contains(int value)
     {
-        // TODO Start Problem 2
+        if (value < Data)
+        {
+            if (Left is null)
+            {
+                return false;
+            }
+            else if (Left.Data == value)
+            {
+                return true;
+            }
+            else
+            {
+                if (Left.Contains(value))
+                {
+                    return true;
+                }
+                ;
+            }
+        }
+        else if (value == Data)
+        {
+            return true;
+        }
+        else
+        {
+            if (Right is null)
+            {
+                return false;
+            }
+            else if (Right.Data == value)
+            {
+                return true;
+            }
+            else
+            {
+                if (Right.Contains(value))
+                {
+                    return true;
+                }
+            }
+        }
         return false;
     }
 
     public int GetHeight()
     {
-        // TODO Start Problem 4
-        return 0; // Replace this line with the correct return statement(s)
+        int rightHeight = 0;
+        int leftHeight = 0;
+
+        int Height(Node node, string direction)
+        {
+            if (direction == "Right")
+            {
+                if (node.Right != null)
+                {
+                    rightHeight = 1 + Height(node.Right, "Right");
+                }
+                return rightHeight;
+            }
+            else if (direction == "Left")
+            {
+                if (node.Left != null)
+                {
+                    leftHeight = 1 + Height(node.Left, "Left");
+                }
+                return leftHeight;
+            }
+            return 0;
+        }
+        if (this.Right == null && this.Left == null)
+        {
+            return 1;
+        }
+
+        else if (this.Right != null) {
+            rightHeight = 1 + Height(this, "Right");
+        }
+        else if (this.Left != null)
+            {
+                leftHeight = 1 + Height(this, "Left");
+            }
+            return Math.Max(rightHeight, leftHeight);
     }
 }
+

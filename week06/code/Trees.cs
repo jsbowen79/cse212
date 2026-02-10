@@ -1,3 +1,5 @@
+using Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.Payloads;
+
 public static class Trees
 {
     /// <summary>
@@ -49,5 +51,22 @@ public static class Trees
     private static void InsertMiddle(int[] sortedNumbers, int first, int last, BinarySearchTree bst)
     {
         // TODO Start Problem 5
+        if (first > last)
+        {
+            return;
+        }
+
+        else
+        {
+       
+        int midIndex = (first + last) / 2;
+     
+            bst.Insert(sortedNumbers[midIndex]);
+      
+        InsertMiddle(sortedNumbers, first, midIndex -1 , bst);
+        InsertMiddle(sortedNumbers, midIndex + 1, last, bst); 
+        }
+            
+        
     }
 }
